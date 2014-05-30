@@ -167,6 +167,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			break;
 
 		case KeyEvent.VK_CONTROL:
+			//remove isjumped
 			if (robot.isDucked() == false && robot.isJumped() == false) {
 				robot.shoot();
 			}
