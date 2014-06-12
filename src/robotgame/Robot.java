@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class Robot {
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
-	final int GROUND = 382;
 
 	private int centerX = 100;
-	private int centerY = GROUND;
+	private int centerY = 377;
 	private boolean jumped = false;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
+	private boolean readyToFire=true;
 
 	private int speedX = 0;
-	private int speedY = 1;
+	private int speedY = 0;
 
 	private static Background bg1 = StartingClass.getBg1();
 	private static Background bg2 = StartingClass.getBg2();
@@ -44,19 +44,11 @@ public class Robot {
 		// updates Y position
 
 		centerY += speedY;
-		if (centerY + speedY >= GROUND) {
-			centerY = GROUND;
-		}
-
+		
 		// handles jumping
 		if (jumped == true) {
 			speedY += 1;
 
-			if (centerY + speedY >= GROUND) {
-				centerY = GROUND;
-				speedY = 0;
-				jumped = false;
-			}
 
 		}
 
@@ -114,8 +106,11 @@ public class Robot {
 	}
 
 	public void shoot() {
-		Projectile p = new Projectile(centerX + 50, centerY - 25);
-		projectiles.add(p);
+		if(readyToFire){
+			Projectile p = new Projectile(centerX + 50, centerY - 25);
+			projectiles.add(p);
+		}
+		
 
 	}
 
@@ -186,5 +181,13 @@ public class Robot {
 	@SuppressWarnings("rawtypes")
 	public ArrayList getProjectiles() {
 		return projectiles;
+	}
+
+	public boolean isReadyToFire() {
+		return readyToFire;
+	}
+
+	public void setReadyToFire(boolean readyToFire) {
+		this.readyToFire = readyToFire;
 	}
 }
