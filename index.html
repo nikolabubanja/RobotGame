@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="//www.java.com/js/deployJava.js"></script>
-</head>
-<body>
-<h1>RobotGame</h1>
-<script>
-    var attributes = {codebase: 'https://github.com/nikolabubanja/RobotGame/tree/gh-pages/src/robotgame',
-                      code: 'StartingClass.java',
-                      archive='robotgame.jar',
-                      width: '800', 
-                      height: '600'};
-    var parameters = {java_arguments: '-Xmx256m'}; // customize per your needs
-    var version = '1.7'; // JDK version
-    deployJava.runApplet(attributes, parameters, version);
-</script>
+    <head>
+        <title>Robot Game by Nikola Bubanja</title>
+    </head>
+    <body>
+        <Applet ARCHIVE = "robotgame.jar" Code="robotgame.StartingClass.class" width=800 Height=480>
+        </Applet>
+    </body>
 
-</body>
-</html>
+<html>
