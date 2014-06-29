@@ -1,5 +1,6 @@
 package robotgame;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Robot {
@@ -12,10 +13,18 @@ public class Robot {
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
-	private boolean readyToFire=true;
+	private boolean readyToFire = true;
 
 	private int speedX = 0;
 	private int speedY = 0;
+	public static Rectangle rect = new Rectangle(0, 0, 0, 0);
+	public static Rectangle rect2 = new Rectangle(0, 0, 0, 0);
+	public static Rectangle rect3 = new Rectangle(0, 0, 0, 0);
+	public static Rectangle rect4 = new Rectangle(0, 0, 0, 0);
+	public static Rectangle yellowRed = new Rectangle(0, 0, 0, 0);
+
+	public static Rectangle footleft = new Rectangle(0, 0, 0, 0);
+	public static Rectangle footright = new Rectangle(0, 0, 0, 0);
 
 	private static Background bg1 = StartingClass.getBg1();
 	private static Background bg2 = StartingClass.getBg2();
@@ -37,19 +46,20 @@ public class Robot {
 			centerX += speedX;
 		}
 		if (speedX > 0 && centerX > 200) {
-			bg1.setSpeedX(-MOVESPEED/5);
-			bg2.setSpeedX(-MOVESPEED/5);
+			bg1.setSpeedX(-MOVESPEED / 5);
+			bg2.setSpeedX(-MOVESPEED / 5);
 		}
 
 		// updates Y position
 
 		centerY += speedY;
-		
+
 		// handles jumping
-		if (jumped == true) {
-			speedY += 1;
 
+		speedY += 1;
 
+		if (speedY > 3) {
+			jumped = true;
 		}
 
 		// prevents going beyond coordinate of 0
@@ -57,6 +67,16 @@ public class Robot {
 		if (centerX + speedX <= 60) {
 			centerX = 61;
 		}
+
+		rect.setRect(centerX - 34, centerY - 63, 68, 63);
+		rect2.setRect(rect.getX(), rect.getY() + 63, 68, 64);
+		rect3.setRect(rect.getX() - 26, rect.getY() + 32, 26, 20);
+		rect4.setRect(rect.getX() + 68, rect.getY() + 32, 26, 20);
+		yellowRed.setRect(centerX - 110, centerY - 110, 180, 180);
+
+		footleft.setRect(centerX - 50, centerY + 20, 50, 15);
+		footright.setRect(centerX, centerY + 20, 50, 15);
+
 	}
 
 	public void moveRight() {
@@ -106,11 +126,10 @@ public class Robot {
 	}
 
 	public void shoot() {
-		if(readyToFire){
+		if (readyToFire) {
 			Projectile p = new Projectile(centerX + 50, centerY - 25);
 			projectiles.add(p);
 		}
-		
 
 	}
 

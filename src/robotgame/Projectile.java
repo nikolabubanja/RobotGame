@@ -1,8 +1,12 @@
 package robotgame;
 
+import java.awt.Rectangle;
+
 public class Projectile {
 	private int x, y, speedX;
 	private boolean visible;
+
+	private Rectangle r;
 
 	public Projectile(int startX, int startY) {
 		x = startX;
@@ -10,12 +14,30 @@ public class Projectile {
 		speedX = 7;
 		visible = true;
 
+		r = new Rectangle(0, 0, 0, 0);
 	}
 
 	public void update() {
 		x += speedX;
+		r.setBounds(x, y, 10, 5);
 		if (x > 800) {
 			visible = false;
+			r = null;
+		}
+		if (x < 800) {
+			checkCollision();
+		}
+	}
+
+	private void checkCollision() {
+		if (r.intersects(StartingClass.hb.r)) {
+			visible = false;
+			StartingClass.score += 1;
+		}
+
+		if (r.intersects(StartingClass.hb2.r)) {
+			visible = false;
+			StartingClass.score += 1;
 		}
 	}
 
